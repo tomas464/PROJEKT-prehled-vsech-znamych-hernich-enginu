@@ -87,8 +87,20 @@ h2 {
 }
 
 .footer {
-    text-align: center;
-    padding: 20px;
     background: #111;
-    margin-top: 40px;
+    color: #ccc;
+    padding: 40px 20px;
+    text-align: center;
+    margin-top: 60px;
+    border-top: 2px solid #222;
+}
+
+.footer-content {
+    max-width: 900px;
+    margin: auto;
+    line-height: 1.6;
+}
+
+.footer strong {
+    color: #0af;
 }
