@@ -1,27 +1,20 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-    // Načtení JSON dat přes AJAX
+    // Načtení enginů z JSON
     fetch("/data/enginedata.json")
-        .then(response => {
-            if (!response.ok) throw new Error("Chyba při načítání JSON");
-            return response.json();
-        })
+        .then(res => res.json())
         .then(data => {
             loadEngines(data.engines);
             loadTable(data.engines);
+            setupRecommendation(data.engines);
         })
-        .catch(err => console.error(err));
+        .catch(err => console.error("Chyba při načítání JSON:", err));
 
-    // Vykreslení karet enginů
     function loadEngines(engines) {
         const container = document.getElementById("engine-container");
-        if (!container) return;
-
         engines.forEach(engine => {
             const card = document.createElement("div");
             card.classList.add("engine-card");
-
-            // Obsah karty s modal detailem
             card.innerHTML = `
                 <img src="${engine.logo}" alt="${engine.name}">
                 <h3>${engine.name}</h3>
@@ -31,71 +24,31 @@ document.addEventListener("DOMContentLoaded", () => {
                 <h4>🔴 Nevýhody</h4>
                 <ul>${engine.disadvantages.map(d => `<li>${d}</li>`).join("")}</ul>
             `;
-
-            // Kliknutí pro zobrazení detailního okna
-            card.addEventListener("click", () => {
-                showEngineDetails(engine);
-            });
-
+            card.addEventListener("click", () => showEngineDetails(engine));
             container.appendChild(card);
         });
     }
 
-    // Funkce pro otevření detailního okna
     function showEngineDetails(engine) {
-        // Vytvoření overlay
         const overlay = document.createElement("div");
-        overlay.style.position = "fixed";
-        overlay.style.top = 0;
-        overlay.style.left = 0;
-        overlay.style.width = "100%";
-        overlay.style.height = "100%";
-        overlay.style.background = "rgba(0,0,0,0.85)";
-        overlay.style.display = "flex";
-        overlay.style.alignItems = "center";
-        overlay.style.justifyContent = "center";
-        overlay.style.zIndex = 1000;
-
-        // Obsah detailního okna
+        overlay.style.cssText = "position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);display:flex;align-items:center;justify-content:center;z-index:1000;";
         const detailBox = document.createElement("div");
-        detailBox.style.background = "#111";
-        detailBox.style.color = "#eee";
-        detailBox.style.padding = "30px";
-        detailBox.style.borderRadius = "12px";
-        detailBox.style.maxWidth = "700px";
-        detailBox.style.width = "90%";
-        detailBox.style.maxHeight = "80%";
-        detailBox.style.overflowY = "auto";
-        detailBox.style.position = "relative";
-
+        detailBox.style.cssText = "background:#111;color:#eee;padding:30px;border-radius:12px;max-width:700px;width:90%;max-height:80%;overflow-y:auto;position:relative;";
         detailBox.innerHTML = `
             <h2>${engine.name}</h2>
-            <img src="${engine.logo}" alt="${engine.name}" style="width:100px; display:block; margin-bottom:15px;">
+            <img src="${engine.logo}" alt="${engine.name}" style="width:100px;margin-bottom:15px;">
             <p>${engine.details}</p>
-            <p><strong>Oficiální web:</strong><br>
-               <a href="${engine.officialSite}" target="_blank" style="color:#0af;">${engine.officialSite}</a>
-            </p>
-            <button id="closeDetail" style="
-                position:absolute; top:15px; right:15px; background:#0af; color:#111; border:none; padding:8px 12px; border-radius:6px; cursor:pointer;">
-                Zavřít
-            </button>
+            <p><strong>Oficiální web:</strong> <a href="${engine.officialSite}" target="_blank" style="color:#0af;">${engine.officialSite}</a></p>
+            <button id="closeDetail" style="position:absolute;top:15px;right:15px;background:#0af;color:#111;border:none;padding:8px 12px;border-radius:6px;cursor:pointer;">Zavřít</button>
         `;
-
         overlay.appendChild(detailBox);
         document.body.appendChild(overlay);
-
-        // Zavření okna
-        document.getElementById("closeDetail").addEventListener("click", () => {
-            document.body.removeChild(overlay);
-        });
+        document.getElementById("closeDetail").addEventListener("click", () => document.body.removeChild(overlay));
     }
 
-    // Vykreslení porovnávací tabulky
     function loadTable(engines) {
-        const tableBody = document.getElementById("tableBody");
-        if (!tableBody) return;
-
-        tableBody.innerHTML = engines.map(e => `
+        const tbody = document.getElementById("tableBody");
+        tbody.innerHTML = engines.map(e => `
             <tr>
                 <td>${e.name}</td>
                 <td>${e.language}</td>
@@ -104,34 +57,46 @@ document.addEventListener("DOMContentLoaded", () => {
             </tr>
         `).join("");
 
-        // Filtrování
         const filterInput = document.getElementById("filterInput");
-        if (filterInput) {
-            filterInput.addEventListener("keyup", function() {
-                const value = this.value.toLowerCase();
-                const rows = tableBody.querySelectorAll("tr");
-
-                rows.forEach(row => {
-                    const engineName = row.cells[0].textContent.toLowerCase();
-                    row.style.display = engineName.includes(value) ? "" : "none";
-                });
+        filterInput.addEventListener("keyup", () => {
+            const val = filterInput.value.toLowerCase();
+            tbody.querySelectorAll("tr").forEach(row => {
+                row.style.display = row.cells[0].textContent.toLowerCase().includes(val) ? "" : "none";
             });
-        }
+        });
     }
 
-    // Doporučení podle kliknuté karty
-    const engineContainer = document.getElementById("engine-container");
-    if (engineContainer) {
-        engineContainer.addEventListener("click", e => {
+    function setupRecommendation(engines) {
+        const container = document.getElementById("engine-container");
+        container.addEventListener("click", e => {
             const card = e.target.closest(".engine-card");
             if (!card) return;
-            const engineName = card.querySelector("h3").textContent;
-            const engine = engines.find(en => en.name === engineName);
+            const name = card.querySelector("h3").textContent;
+            const engine = engines.find(en => en.name === name);
             if (engine) {
-                document.getElementById("recommendation-text").innerText =
-                    `Doporučení: ${engine.name} je ideální pro: ${engine.idealFor}.`;
+                document.getElementById("recommendation-text").innerText = `Doporučení: ${engine.name} je ideální pro: ${engine.idealFor}.`;
             }
         });
     }
 
+    // Formulář
+    const form = document.getElementById("contactForm");
+    form.addEventListener("submit", e => {
+        e.preventDefault();
+        const formData = Object.fromEntries(new FormData(form).entries());
+
+        fetch("/submit-form", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(formData)
+        })
+        .then(res => res.json())
+        .then(data => {
+            document.getElementById("formResponse").innerText = data.message;
+            form.reset();
+        })
+        .catch(err => console.error(err));
+    });
+
 });
+
