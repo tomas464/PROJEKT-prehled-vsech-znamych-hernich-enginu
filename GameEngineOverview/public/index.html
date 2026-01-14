@@ -6,7 +6,6 @@
     <title>Herní Enginy – Přehled</title>
     <link rel="stylesheet" href="/css/style.css">
 </head>
-
 <body>
 
 <header class="header">
@@ -16,6 +15,7 @@
         <a href="#engines">Seznam enginů</a>
         <a href="#compare">Porovnání</a>
         <a href="#recommend">Doporučení</a>
+        <a href="#contact">Kontakt</a>
     </nav>
 </header>
 
@@ -23,8 +23,7 @@
     <div class="container">
         <h2>Co je herní engine?</h2>
         <p>
-            Herní engine je komplexní softwarový rámec, který vývojářům poskytuje všechny klíčové nástroje potřebné pro tvorbu moderních her. Zahrnuje například grafický renderovací systém, fyzikální simulaci, zvukový modul, animace, správu prostředí, práci se skripty a mnoho dalších funkcí. Díky tomu se programátor nemusí starat o technické detaily na nízké úrovni a může se soustředit přímo na tvorbu obsahu, gameplay a designu.
-            Na této stránce najdete přehled nejznámějších a nejpoužívanějších herních enginů, včetně jejich hlavních výhod, omezení a typických použití. Cílem je pomoci vám lépe se zorientovat ve světě herních technologií a vybrat engine, který nejlépe vyhovuje vašemu projektu — ať už jde o 2D mobilní hru, 3D akční titul nebo komplexní AAA produkci.
+            Herní engine je komplexní softwarový rámec, který vývojářům poskytuje všechny klíčové nástroje potřebné pro tvorbu moderních her...
         </p>
     </div>
 </section>
@@ -40,7 +39,6 @@
     <div class="container">
         <h2>Porovnávací tabulka</h2>
         <input type="text" id="filterInput" placeholder="Filtrovat podle názvu…" />
-
         <table id="compare-table">
             <thead>
                 <tr>
@@ -62,25 +60,17 @@
     </div>
 </section>
 
-<footer id="footer" class="footer">
-    <div class="footer-content">
-        <p><strong>Game Engine Overview</strong> – vzdělávací projekt zaměřený na porovnání a přehled herních enginů.</p>
-
-        <p>
-            Stránka shromažďuje informace o populárních enginech, jejich možnostech a využití v moderním herním vývoji.  
-            Cílem je pomoci začátečníkům i pokročilým vývojářům lépe se orientovat v dostupných nástrojích.
-        </p>
-
-        <p>Autor projektu: <strong>Tomáš Maršál</strong></p>
-
-        <p style="opacity:0.7; font-size:0.9em; margin-top:10px;">
-            © 2025 – Všechna práva vyhrazena | Data jsou informativní a mohou se lišit podle verzí jednotlivých enginů.
-        </p>
+<section id="contact" class="section">
+    <div class="container">
+        <h2>Kontaktujte nás</h2>
+        <form id="contactForm">
+            <input type="text" name="name" placeholder="Vaše jméno" required />
+            <input type="email" name="email" placeholder="Váš email" required />
+            <textarea name="message" placeholder="Zpráva" required></textarea>
+            <button type="submit">Odeslat</button>
+        </form>
+        <p id="formResponse"></p>
     </div>
-</footer>
+</section>
 
-
-<script src="/js/script.js" defer></script>
-</body>
-</html>
 
