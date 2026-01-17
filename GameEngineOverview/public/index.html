@@ -3,42 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Herní Enginy – Přehled</title>
+    <title>Herní enginy – přehled</title>
+
+    <!-- CSS -->
     <link rel="stylesheet" href="/css/style.css">
 </head>
+
 <body>
 
+<!-- ===== HEADER ===== -->
 <header class="header">
-    <h1>Herní Enginy – Kompletní přehled</h1>
+    <h1>Herní Enginy – Přehled</h1>
     <nav>
         <a href="#intro">Úvod</a>
-        <a href="#engines">Seznam enginů</a>
+        <a href="#engines">Enginy</a>
         <a href="#compare">Porovnání</a>
         <a href="#recommend">Doporučení</a>
         <a href="#contact">Kontakt</a>
     </nav>
 </header>
 
+<!-- ===== INTRO ===== -->
 <section id="intro" class="section">
     <div class="container">
         <h2>Co je herní engine?</h2>
         <p>
-            Herní engine je komplexní softwarový rámec, který vývojářům poskytuje všechny klíčové nástroje potřebné pro tvorbu moderních her...
+            Herní engine je softwarový nástroj, který umožňuje vytvářet hry bez nutnosti
+            programovat vše od nuly. Poskytuje grafiku, fyziku, zvuk, skriptování a další
+            systémy potřebné pro moderní herní vývoj.
         </p>
     </div>
 </section>
 
+<!-- ===== ENGINES ===== -->
 <section id="engines" class="section">
     <div class="container">
         <h2>Přehled herních enginů</h2>
-        <div id="engine-container" class="engine-grid"></div>
+        <div id="engine-container" class="engine-grid">
+            <!-- KARTY SE NAČÍTAJÍ Z JS -->
+        </div>
     </div>
 </section>
 
+<!-- ===== COMPARE ===== -->
 <section id="compare" class="section">
     <div class="container">
-        <h2>Porovnávací tabulka</h2>
-        <input type="text" id="filterInput" placeholder="Filtrovat podle názvu…" />
+        <h2>Porovnání enginů</h2>
+
+        <input
+            type="text"
+            id="filterInput"
+            placeholder="Filtrovat podle názvu enginu..."
+        >
+
         <table id="compare-table">
             <thead>
                 <tr>
@@ -48,29 +65,68 @@
                     <th>Platformy</th>
                 </tr>
             </thead>
-            <tbody id="tableBody"></tbody>
+            <tbody id="tableBody">
+                <!-- ŘÁDKY SE NAČÍTAJÍ Z JS -->
+            </tbody>
         </table>
     </div>
 </section>
 
+<!-- ===== RECOMMEND ===== -->
 <section id="recommend" class="section">
     <div class="container">
-        <h2>Doporučení podle typu projektu</h2>
-        <p id="recommendation-text">Klikněte na kartu enginu pro doporučení…</p>
+        <h2>Doporučení</h2>
+        <p id="recommendation-text">
+            Klikni na kartu enginu a zobrazí se doporučení.
+        </p>
     </div>
 </section>
 
+<!-- ===== CONTACT / FORM ===== -->
 <section id="contact" class="section">
     <div class="container">
-        <h2>Kontaktujte nás</h2>
+        <h2>Kontaktuj nás</h2>
+
         <form id="contactForm">
-            <input type="text" name="name" placeholder="Vaše jméno" required />
-            <input type="email" name="email" placeholder="Váš email" required />
-            <textarea name="message" placeholder="Zpráva" required></textarea>
-            <button type="submit">Odeslat</button>
+            <input
+                type="text"
+                name="name"
+                placeholder="Tvé jméno"
+                required
+            >
+
+            <input
+                type="email"
+                name="email"
+                placeholder="Tvůj e-mail"
+                required
+            >
+
+            <textarea
+                name="message"
+                placeholder="Zpráva"
+                rows="5"
+                required
+            ></textarea>
+
+            <button type="submit">Odeslat zprávu</button>
         </form>
-        <p id="formResponse"></p>
+
+        <!-- POTVRZENÍ PRO UŽIVATELE -->
+        <p id="formResponse" class="form-response"></p>
     </div>
 </section>
 
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+    <p>
+        <strong>Game Engine Overview</strong><br>
+        Vzdělávací projekt o herních enginech<br><br>
+        © 2025 Tomáš Maršál
+    </p>
+</footer>
 
+<!-- JS -->
+<script src="/js/script.js"></script>
+</body>
+</html>
