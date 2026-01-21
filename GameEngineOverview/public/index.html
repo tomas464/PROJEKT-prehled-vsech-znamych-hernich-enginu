@@ -1,62 +1,64 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
+    <!-- Nastavení znakové sady -->
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Název stránky -->
     <title>Herní enginy – přehled</title>
 
-    <!-- CSS -->
+    <!-- Responzivní zobrazení -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Připojení CSS stylů -->
     <link rel="stylesheet" href="/css/style.css">
 </head>
-
 <body>
 
-<!-- ===== HEADER ===== -->
+<!-- Hlavička stránky -->
 <header class="header">
-    <h1>Herní Enginy – Přehled</h1>
+    <h1>Herní Enginy – Kompletní přehled</h1>
+
+    <!-- Navigační menu -->
     <nav>
         <a href="#intro">Úvod</a>
         <a href="#engines">Enginy</a>
         <a href="#compare">Porovnání</a>
-        <a href="#recommend">Doporučení</a>
         <a href="#contact">Kontakt</a>
     </nav>
 </header>
 
-<!-- ===== INTRO ===== -->
+<!-- Úvodní sekce -->
 <section id="intro" class="section">
     <div class="container">
         <h2>Co je herní engine?</h2>
         <p>
-            Herní engine je softwarový nástroj, který umožňuje vytvářet hry bez nutnosti
-            programovat vše od nuly. Poskytuje grafiku, fyziku, zvuk, skriptování a další
-            systémy potřebné pro moderní herní vývoj.
+            Herní engine je software, který pomáhá s vývojem her.
+            Obsahuje grafiku, fyziku a další potřebné systémy.
         </p>
     </div>
 </section>
 
-<!-- ===== ENGINES ===== -->
+<!-- Sekce s kartami enginů -->
 <section id="engines" class="section">
     <div class="container">
-        <h2>Přehled herních enginů</h2>
-        <div id="engine-container" class="engine-grid">
-            <!-- KARTY SE NAČÍTAJÍ Z JS -->
-        </div>
+        <h2>Přehled enginů</h2>
+
+        <!-- Sem se dynamicky načítají karty z JSON -->
+        <div id="engine-container" class="engine-grid"></div>
     </div>
 </section>
 
-<!-- ===== COMPARE ===== -->
+<!-- Porovnávací tabulka -->
 <section id="compare" class="section">
     <div class="container">
-        <h2>Porovnání enginů</h2>
+        <h2>Porovnání</h2>
 
-        <input
-            type="text"
-            id="filterInput"
-            placeholder="Filtrovat podle názvu enginu..."
-        >
+        <!-- Pole pro filtrování tabulky -->
+        <input type="text" id="filterInput" placeholder="Filtrovat podle názvu…">
 
-        <table id="compare-table">
+        <!-- Tabulka enginů -->
+        <table>
             <thead>
                 <tr>
                     <th>Engine</th>
@@ -65,68 +67,39 @@
                     <th>Platformy</th>
                 </tr>
             </thead>
-            <tbody id="tableBody">
-                <!-- ŘÁDKY SE NAČÍTAJÍ Z JS -->
-            </tbody>
+
+            <!-- Tělo tabulky se plní pomocí JavaScriptu -->
+            <tbody id="tableBody"></tbody>
         </table>
     </div>
 </section>
 
-<!-- ===== RECOMMEND ===== -->
-<section id="recommend" class="section">
-    <div class="container">
-        <h2>Doporučení</h2>
-        <p id="recommendation-text">
-            Klikni na kartu enginu a zobrazí se doporučení.
-        </p>
-    </div>
-</section>
-
-<!-- ===== CONTACT / FORM ===== -->
+<!-- Kontaktní formulář -->
 <section id="contact" class="section">
     <div class="container">
-        <h2>Kontaktuj nás</h2>
+        <h2>Kontakt</h2>
 
+        <!-- Formulář odesílaný přes AJAX -->
         <form id="contactForm">
-            <input
-                type="text"
-                name="name"
-                placeholder="Tvé jméno"
-                required
-            >
+            <input type="text" name="name" placeholder="Jméno" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <textarea name="message" placeholder="Zpráva" required></textarea>
 
-            <input
-                type="email"
-                name="email"
-                placeholder="Tvůj e-mail"
-                required
-            >
-
-            <textarea
-                name="message"
-                placeholder="Zpráva"
-                rows="5"
-                required
-            ></textarea>
-
-            <button type="submit">Odeslat zprávu</button>
+            <button type="submit">Odeslat</button>
         </form>
 
-        <!-- POTVRZENÍ PRO UŽIVATELE -->
+        <!-- Zpráva o úspěšném odeslání -->
         <p id="formResponse" class="form-response"></p>
     </div>
 </section>
 
-<!-- ===== FOOTER ===== -->
+<!-- Patička stránky -->
 <footer class="footer">
-    <p>
-        <strong>Game Engine Overview</strong><br>
-        Vzdělávací projekt o herních enginech<br><br>
-        © 2025 Tomáš Maršál
-    </p>
+    <p>Autor: Tomáš Maršál</p>
+    <p>Projekt: Herní enginy & AJAX</p>
 </footer>
 
-<!-- JS -->
+<!-- Připojení JavaScriptu -->
 <script src="/js/script.js"></script>
 </body>
 </html>
