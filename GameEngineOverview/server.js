@@ -8,7 +8,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/css", express.static(path.join(__dirname, "css")));
 app.use("/js", express.static(path.join(__dirname, "js")));
 app.use("/data", express.static(path.join(__dirname, "data")));
-app.use("/assets", express.static(path.join(__dirname, "assets"))); // 🔥 LOGA
+app.use("/assets", express.static(path.join(__dirname, "assets"))); // LOGA
 
 
 // Hlavní stránka
